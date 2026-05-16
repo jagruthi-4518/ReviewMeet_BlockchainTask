@@ -14,10 +14,41 @@ The hash is generated from:
 - Previous block hash
 - Nonce
 
+```python
+def hashing(data,timestamp,prevHash,nonce):
+    hashInput = str(data)+str(timestamp)+str(prevHash)+str(nonce)
+    return hashlib.sha256(hashInput.encode()).hexdigest()
+```
+
 This ensures that even a tiny change in block data results in a completely different hash.
 
 ### 2. Mining and Proof of Work
-Mining is implemented by repeatedly changing a **nonce** value until the hash of the current block satisfies a certain diffuculty(a certain number to start with) and reaches the target. Once mined, gives an output like,
+Mining is implemented by repeatedly changing a **nonce** value until the hash of the current block satisfies a certain diffuculty(a certain number to start with) and reaches the target. 
+
+```python
+ while True:
+        hash = hashing(data,timestamp,prevHash,nonce)
+        if hash[:difficulty]== target:
+            print("Found Nonce:",nonce)
+            print("Hash:",hash)
+
+            #returning attributes for the block
+            #the block structure is created
+            return{
+                "index": index,
+                "timestamp": timestamp,
+                "data": data,
+                "prevHash": prevHash,
+                "nonce": nonce,
+                "hash": hash
+            }
+        #incrementing the nonce until it reaches the target 
+        else:
+            nonce+=1
+```
+
+Once mined, gives an output like,
+![Mining Output](Screenshot%202026-05-16%20194506.png)
 
 And after the Mining is done, the function returns the block structure with its data(index,timestamp ect.) as attributes
 
@@ -53,6 +84,7 @@ And after the Mining is done, the function returns the block structure with its 
         if current_block["hash"][:difficulty]!= target:
             return False
 ```
+Returns a Boolean
 ### 4. Initiation of blockchain
 The blockchain is initiated but is maintained empty at the begining
 ```python
@@ -93,7 +125,31 @@ It gives 4 choices:
 - Exit the session
 
 ### Outputs
+1. After inputing the difficulty, the create genesis function is called and it is mined as shown below.
+   
+   ![Create_genesis Output](Screenshot%202026-05-16%20194529.png)
+   
+2. #### Chosing option 1 - Add Block
 
+   ![Add_block Output](Screenshot%202026-05-16%20194623.png)
+   
+After we choose 1 we get to input the data, after entering the block is mined and the whole chain along with all the block attributes is displayed as we can see in the screenshot.
+
+3. #### Choosing option 2- Validation of the block chain
+
+![Validation Output](Screenshot%202026-05-16%20194656.png)
+
+The blockchain as a whole is displayed and at last shows whether the blockchain is valid or not.
+
+4. #### Option 4 - Random tampering and validating the blockchain
+
+![Tampering Output](Screenshot%202026-05-16%20194723.png)
+
+It displays no. of the block that has been tampered with.
+
+Displays the blockchain after tampering and we can observe in the displayed data that the transaction is changed to **This Transaction is Tampered**.
+
+And we can also see that the Blockchain validation shows False in the end showing that if any transaction is tampered with, the successive blockchain break of the chain and this is where the validation breaks.
 
 
 
