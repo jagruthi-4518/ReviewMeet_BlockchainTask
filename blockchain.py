@@ -112,7 +112,9 @@ while True:
             print("Add atlest 1 block before initiating tampering")
         else:   
             block_no = random.randint(1, len(blockchain) - 1)
-            blockchain[block_no]["data"] = "This transaction is Tampered"
+            block =  blockchain[block_no]
+            block["data"] = "This transaction is Tampered"
+            block["hash"] = hashing(block["data"],block["timestamp"],block["prevHash"],block["nonce"])
         
             print("\nTampered the data in block",block_no)
             display_chain(blockchain)
