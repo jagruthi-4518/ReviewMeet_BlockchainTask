@@ -112,6 +112,20 @@ def add_block(blockchain,data,difficulty):
     block=mining(len(blockchain),data,blockchain[-1]["hash"],difficulty)
     blockchain.append(block)
 ```
+
+### 6. Tampering with a random block
+
+A random number is obtained and that numbered blocks data is changed and the hash is calculated according to that data. This helps us to understand the intigrety of the blockchain.
+```python
+block_no = random.randint(1, len(blockchain) - 1)
+            block =  blockchain[block_no]
+            block["data"] = "This transaction is Tampered"
+            block["hash"] = hashing(block["data"],block["timestamp"],block["prevHash"],block["nonce"])
+        
+            print("\nTampered the data in block",block_no)
+            display_chain(blockchain)
+            print("\nBlockchain Valid?:", validation(blockchain, difficulty))
+```
 ## HOW THE SIMULATION WORKS
 #### Step-1
 The computer asks the user to input the difficulty.
@@ -149,10 +163,13 @@ The blockchain as a whole is displayed and at last shows whether the blockchain 
 
 ![Tampering Output_before_data](Screenshot%202026-05-19%20150624.png)
 
-
 It displays no. of the block that has been tampered with.
 
 Displays the blockchain after tampering and we can observe in the displayed data that the transaction is changed to **This Transaction is Tampered**.We can also observe that the hash of the block which was tampered is changed from the above two picture if we compared.
+
+![Tampering_data](Screenshot%202026-05-19%20153426.png)
+
+The above image is for better demonstration that tampering the data of one block makes the whole blockchain invalid. The block with index 1 is tampered, its hash has changed but in the the second block the `prevHash` hasn't changed so the validation returns invalid there.
 
 And we can also see that the Blockchain validation shows False in the end showing that if any transaction is tampered with, the successive blocks of the chain break and this is where the validation breaks.
 
