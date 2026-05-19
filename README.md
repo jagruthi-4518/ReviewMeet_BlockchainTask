@@ -104,6 +104,8 @@ def create_genesis_block(difficulty):
 ### 5. Adding a Block
 After calling the function `add_block()` the block is mined and is displayed like this on the terminal.
 
+![Mining Output](Screenshot%202026-05-16%20194506.png)
+
 And then the block is appended to the chain
 ```python
 def add_block(blockchain,data,difficulty):
@@ -142,14 +144,17 @@ After we choose 1 we get to input the data, after entering the block is mined an
 The blockchain as a whole is displayed and at last shows whether the blockchain is valid or not.
 
 4. #### Option 4 - Random tampering and validating the blockchain
+   
+![Tampering Output_after_data](Screenshot%202026-05-19%20150723.png)
 
-![Tampering Output](Screenshot%202026-05-16%20194723.png)
+![Tampering Output_before_data](Screenshot%202026-05-19%20150624.png)
+
 
 It displays no. of the block that has been tampered with.
 
-Displays the blockchain after tampering and we can observe in the displayed data that the transaction is changed to **This Transaction is Tampered**.
+Displays the blockchain after tampering and we can observe in the displayed data that the transaction is changed to **This Transaction is Tampered**.We can also observe that the hash of the block which was tampered is changed from the above two picture if we compared.
 
-And we can also see that the Blockchain validation shows False in the end showing that if any transaction is tampered with, the successive blockchain break of the chain and this is where the validation breaks.
+And we can also see that the Blockchain validation shows False in the end showing that if any transaction is tampered with, the successive blocks of the chain break and this is where the validation breaks.
 
 
 
