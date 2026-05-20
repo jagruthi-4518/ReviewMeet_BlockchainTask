@@ -1,6 +1,6 @@
 import hashlib#for hashing
 import time#for timestamps
-import random
+import random#for randomly picking a number for tampering
 
 #SHA 256 hashing
 def hashing(data,timestamp,prevHash,nonce):
@@ -11,7 +11,7 @@ def hashing(data,timestamp,prevHash,nonce):
 def mining(index,data,prevHash,difficulty):
     nonce=0
     timestamp=time.time()
-    target = "0"*difficulty#generally difficulty condions are like hashes starting with some fixed number of 0's
+    target = "0"*difficulty#generally difficulty conditons are like hashes starting with some fixed number of 0's
     print("\nMining block",index)
     #running loop until the hash reaches the target
     while True:
@@ -98,8 +98,15 @@ while True:
                     )
 
     if choice == "1":
-        data = input("\nEnter transaction/data: ")
-        add_block(blockchain, data, difficulty)
+        num = int(input("\nEnter number of transactions: "))
+
+        transactions = []
+
+        for i in range(num):
+            transaction = input(f"Enter transaction {i+1}: ")
+            transactions.append(transaction)
+
+        add_block(blockchain, transactions, difficulty)
         display_chain(blockchain)
 
     elif choice == "2":
@@ -111,14 +118,19 @@ while True:
         if len(blockchain)<=1:
             print("Add atlest 1 block before initiating tampering")
         else:   
-            block_no = random.randint(1, len(blockchain) - 1)
-            block =  blockchain[block_no]
-            block["data"] = "This transaction is Tampered"
-            block["hash"] = hashing(block["data"],block["timestamp"],block["prevHash"],block["nonce"])
-        
-            print("\nTampered the data in block",block_no)
-            display_chain(blockchain)
-            print("\nBlockchain Valid?:", validation(blockchain, difficulty))
+             block_no = random.randint(1, len(blockchain) - 1)
+
+        block = blockchain[block_no]
+        tx_index = random.randint(0, len(block["data"]) - 1)
+        block["data"][tx_index] = "Tampered Transaction"
+
+        block["hash"] = hashing(block["data"],block["timestamp"],block["prevHash"],block["nonce"])
+
+        print(f"\nTampered transaction {tx_index} in block {block_no}")
+
+        display_chain(blockchain)
+
+        print("\nBlockchain Valid?:", validation(blockchain, difficulty))
 
     elif choice == "4":
         print("\nSession Completed\n")
@@ -128,4 +140,3 @@ while True:
         print("\nInvalid choice")
 
         
-
