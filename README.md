@@ -173,8 +173,11 @@ The above image is for better demonstration that tampering the data of one block
 
 And we can also see that the Blockchain validation shows False in the end showing that if any transaction is tampered with, the successive blocks of the chain break and this is where the validation breaks.
 
-These outputs are for single transactions. Later I implemented multiple transactions for a single transaction
+These outputs are for single transactions. Later I implemented multiple transactions for a single transaction. 
 
+For implementing multiple transactions originally I created an empty array, take input of the number of transactions fro user and append each transaction to the array.The data look like,
+
+![MultipleTransaction](Screenshot%202026-05-20%20142052.png)
 
 
 
