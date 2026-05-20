@@ -22,6 +22,10 @@ def hashing(data,timestamp,prevHash,nonce):
 
 This ensures that even a tiny change in block data results in a completely different hash.
 
+### Why increasing difficulty increases mining time?
+
+Increasing mining difficulty increases mining time because the miner must find a hash that satisfies stricter conditions, such as beginning with a larger number of leading zeros. Since hash outputs are random in nature, the probability of generating a valid hash decreases exponentially as difficulty increases. As a result, the miner must perform a significantly larger number of nonce attempts and hash computations before successfully mining a block. Therefore, higher difficulty directly increases the computational effort and time required for the mining process.
+
 ### 2. Mining and Proof of Work
 Mining is implemented by repeatedly changing a **nonce** value until the hash of the current block satisfies a certain diffuculty(a certain number to start with) and reaches the target. 
 
@@ -177,7 +181,10 @@ These outputs are for single transactions. Later I implemented multiple transact
 
 For implementing multiple transactions originally I created an empty array, take input of the number of transactions fro user and append each transaction to the array.The data look like,
 
-![MultipleTransaction](Screenshot%202026-05-20%20142052.png)
+![MultipleTransaction](Screenshot%202026-05-20%20142035.png)
+
+And Tampering logic is also same as before but here the transation number is also randomly choosen
+![MultipleTransaction_tampering](Screenshot%202026-05-20%20142052.png)
 
 
 
