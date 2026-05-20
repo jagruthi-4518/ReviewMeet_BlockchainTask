@@ -113,7 +113,7 @@ def add_block(blockchain,data,difficulty):
     blockchain.append(block)
 ```
 
-### 6. Tampering with a random block
+### 6. Tampering with a random block - BONUS TASK
 
 A random number is obtained and that numbered blocks data is changed and the hash is calculated according to that data. This helps us to understand the intigrety of the blockchain.
 ```python
@@ -172,6 +172,10 @@ Displays the blockchain after tampering and we can observe in the displayed data
 The above image is for better demonstration that tampering the data of one block makes the whole blockchain invalid. The block with index 1 is tampered, its hash has changed but in the the second block the `prevHash` hasn't changed so the validation returns invalid there.
 
 And we can also see that the Blockchain validation shows False in the end showing that if any transaction is tampered with, the successive blocks of the chain break and this is where the validation breaks.
+
+These outputs are for single transactions. Later I implemented multiple transactions for a single transaction
+
+
 
 
 
